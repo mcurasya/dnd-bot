@@ -1,2 +1,2 @@
 # dnd-bot
-dnd bot for our games
+dnd telegram bot for our games
