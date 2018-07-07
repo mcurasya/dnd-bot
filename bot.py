@@ -1,3 +1,4 @@
+import time
 import telebot
 import constants
 from rolls import *
@@ -105,4 +106,9 @@ def new_user(message):
         f.write(message.from_user.first_name+' ')
 
 
-bot.polling(none_stop=True)
+while True:
+    try:
+        bot.polling(none_stop=True)
+    except Exception as e:
+        print(e)
+        time.sleep(3)

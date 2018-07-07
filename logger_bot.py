@@ -1,6 +1,6 @@
 import telebot
 import constants
-
+import time
 log_bot = telebot.TeleBot(constants.log_token)
 
 
@@ -38,4 +38,9 @@ def names_handler(message):
             log_bot.send_message(constants.my_id, name)
 
 
-log_bot.polling(none_stop=True)
+while True:
+    try:
+        log_bot.polling(none_stop=True)
+    except Exception as e:
+        print(e)
+        time.sleep(3)
