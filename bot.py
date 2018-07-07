@@ -9,7 +9,7 @@ log_bot = telebot.TeleBot(constants.log_token)
 
 def next_step(message):
     user_markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=False)
-    user_markup.row('roll dice', 'generate name', '/start')
+    user_markup.row('roll dice', 'generate name')
     user_markup.row('add name', 'add surname')
     bot.send_message(message.from_user.id, 'select next move', reply_markup=user_markup)
     del message
