@@ -7,11 +7,12 @@ log_bot = telebot.TeleBot(constants.log_token)
 @log_bot.message_handler(commands='start')
 def start_handler(message):
     if message.from_user.id == constants.my_id:
-        user_markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=False)
+        user_markup = telebot.types.ReplyKeyboardMarkup(one_time_keyboard=False, resize_keyboard=True)
         user_markup.add('/users', '/names', '/surnames')
         log_bot.send_message(constants.my_id, 'логгирование', reply_markup=user_markup)
     else:
         log_bot.send_message(message.from_user.id, 'извините, этот бот не для вас')
+
 
 @log_bot.message_handler(commands='users')
 def users_handler(message):
