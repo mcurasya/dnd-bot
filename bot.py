@@ -53,8 +53,8 @@ def process_dice_roll(message):
         n, die = map(int, message.text.strip().lower().split('d'))
         x, s = multiple_roll(die, n)
         bot.send_message(message.from_user.id, 'you rolled {}, sum is {}'.format(x, s))
-        bot.send_message(constants.dm_id, '{} rolled {}, sum is {}'.format(message.from_user.username, x, s))
-        bot.send_message(constants.my_id, '{} rolled {}, sum is {}'.format(message.from_user.username, x, s))
+        bot.send_message(constants.dm_id, '{} rolled {}, sum is {}'.format(message.from_user.first_name, x, s))
+        log_bot.send_message(constants.my_id, '{} rolled {}, sum is {}'.format(message.from_user.first_name, x, s))
         print(x, s)
     except TypeError as e:
         print(e)
