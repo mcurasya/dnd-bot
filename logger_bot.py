@@ -11,7 +11,7 @@ def start_handler(message):
         user_markup.add('/users', '/names', '/surnames')
         log_bot.send_message(constants.my_id, 'логгирование', reply_markup=user_markup)
     else:
-        log_bot.send_message(message.from_user.id, 'извинитеб этот бот не для вас')
+        log_bot.send_message(message.from_user.id, 'извините, этот бот не для вас')
 
 @log_bot.message_handler(commands='users')
 def users_handler(message):
