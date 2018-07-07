@@ -2,7 +2,7 @@ import time
 import telebot
 import constants
 from rolls import *
-
+import logging
 
 bot = telebot.TeleBot(constants.token)
 log_bot = telebot.TeleBot(constants.log_token)
@@ -112,3 +112,4 @@ while True:
     except Exception as e:
         print(e)
         time.sleep(3)
+        logging.error(e)
