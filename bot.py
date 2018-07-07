@@ -56,7 +56,7 @@ def process_dice_roll(message):
         bot.send_message(constants.dm_id, '{} rolled {}, sum is {}'.format(message.from_user.first_name, x, s))
         log_bot.send_message(constants.my_id, '{} rolled {}, sum is {}'.format(message.from_user.first_name, x, s))
         print(x, s)
-    except TypeError as e:
+    except ValueError as e:
         print(e)
         bot.send_message(message.from_user.id, "извините, вы ввели что то не так")
         log_bot.send_message(constants.my_id, message.from_user.first_name + ' made a mistake')
