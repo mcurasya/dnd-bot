@@ -1,7 +1,9 @@
+import json
 from random import randint
 
 
 def multiple_roll(dice, quantity):
+    """imitate multiple dice roll"""
     x = []
     for i in range(quantity):
         x.append(randint(1, dice))
@@ -40,3 +42,5 @@ def add_sur(text):
     sur.write(add)
     sur.close()
     return add
+
+
