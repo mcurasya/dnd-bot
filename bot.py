@@ -57,13 +57,13 @@ def handle_message(message):
 def handle_roll(message):
     log_bot.send_message(constants.my_id, message.from_user.first_name + ' rolls dice')
     print(message.from_user.first_name + ' rolls dice')
-    msg = bot.send_message(message.from_user.id, 'введите кубик в формате XdY')
+    msg = bot.send_message(message.from_user.id, 'введите кубик в формате XdY или XкY')
     bot.register_next_step_handler(msg, process_dice_roll)
 
 
 def process_dice_roll(message):
     try:
-        n, die = map(int, message.text.strip().lower().split('d'))
+        n, die = map(int, message.text.strip().lower().split('d', 'к', ' '))
         x, s = multiple_roll(die, n)
         bot.send_message(message.from_user.id, 'you rolled {}, sum is {}'.format(x, s))
         bot.send_message(constants.dm_id, '{} rolled {}, sum is {}'.format(message.from_user.first_name, x, s))
@@ -138,7 +138,8 @@ def process_add_ability_name(message):
 
 def process_add_ability_description(message):
     abilities[name.strip().lower()] = message.text.strip().lower()
-    s = json.dumps(abilities)
+    sorted_abilities = sort_dict(abilities)
+    s = json.dumps(sorted_abilities)
     with open('names_and_surnames\\abilities.json', 'w', encoding='utf-8') as f:
         f.write(s)
     next_step(message)
