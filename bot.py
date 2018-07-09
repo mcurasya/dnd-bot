@@ -1,4 +1,6 @@
 import time
+from os import terminal_size
+
 import telebot
 import constants
 from rolls import *
@@ -57,13 +59,13 @@ def handle_message(message):
 def handle_roll(message):
     log_bot.send_message(constants.my_id, message.from_user.first_name + ' rolls dice')
     print(message.from_user.first_name + ' rolls dice')
-    msg = bot.send_message(message.from_user.id, 'введите кубик в формате XdY или XкY')
+    msg = bot.send_message(message.from_user.id, 'введите кубик в формате XdY')
     bot.register_next_step_handler(msg, process_dice_roll)
 
 
 def process_dice_roll(message):
     try:
-        n, die = map(int, message.text.strip().lower().split('d', 'к', ' '))
+        n, die = map(int, message.text.strip().lower().split('d'))
         x, s = multiple_roll(die, n)
         bot.send_message(message.from_user.id, 'you rolled {}, sum is {}'.format(x, s))
         bot.send_message(constants.dm_id, '{} rolled {}, sum is {}'.format(message.from_user.first_name, x, s))
@@ -116,7 +118,7 @@ def process_add_name(message):
 def new_user(message):
     """add user that uses bot first time"""
     with open('names_and_surnames\\users.txt', 'a', encoding='utf-8') as f:
-        f.write(message.from_user.first_name+' ')
+        f.write(' ' + message.from_user.first_name)
 
 
 def handle_add_ability(message):
@@ -146,9 +148,11 @@ def process_add_ability_description(message):
 
 
 def handle_show_ability(message):
+    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     for name in abilities.keys():
         bot.send_message(message.from_user.id, name)
-    msg = bot.send_message(message.from_user.id, 'введите название способности')
+        markup.add(name)
+    msg = bot.send_message(message.from_user.id, 'выберите способность',reply_markup=markup)
     bot.register_next_step_handler(msg, process_show_ability)
 
 

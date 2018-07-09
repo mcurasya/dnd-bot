@@ -45,7 +45,7 @@ def add_sur(text):
 
 
 def sort_dict(d):
-    sorted_keys= sorted(d)
+    sorted_keys = sorted(d)
     res = {}
     for key in sorted_keys:
         res[key] = d[key]
